@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karuna Srivastava — Data & Analytics</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f7f4ef;
+    --accent: #c8440a;
+    --muted: #7a7268;
+    --border: #e0dbd2;
+    --card: #ffffff;
+    --tag-bg: #ede9e2;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; max-width: 1100px; margin: 0 auto; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem;
+    max-width: 100%;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 560px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #a3350a; }
+  .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn-outline:hover { background: var(--ink); color: var(--paper); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* SECTION HEADINGS */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { color: var(--muted); font-weight: 300; line-height: 1.85; font-size: 1.05rem; margin-bottom: 1.25rem; }
+  .about-text p strong { color: var(--ink); font-weight: 500; }
+  .about-aside { padding-left: 3rem; border-left: 2px solid var(--border); }
+  .aside-item { margin-bottom: 2rem; }
+  .aside-item-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .aside-item-val { font-size: 1rem; font-weight: 500; }
+
+  /* SKILLS */
+  #skills { background: var(--ink); color: var(--paper); max-width: 100%; }
+  #skills .inner { max-width: 1100px; margin: 0 auto; }
+  #skills h2 { color: var(--paper); margin-bottom: 3rem; }
+  #skills .section-label { color: #c8440a; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px;
+    font-size: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    color: rgba(247,244,239,0.8);
+    letter-spacing: 0.03em;
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item {
+    padding-left: 2.5rem;
+    padding-bottom: 3.5rem;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -4px; top: 6px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .tl-meta {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .tl-company { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+  .tl-role { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.75rem; }
+  .tl-bullets { list-style: none; padding: 0; }
+  .tl-bullets li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding: 0.3rem 0;
+    padding-left: 1.1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .tl-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  /* HACKATHONS */
+  .awards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  .award-card {
+    padding: 2rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .award-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+  .award-org { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .award-title { font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 0.75rem; line-height: 1.3; }
+  .award-desc { font-size: 0.88rem; color: rgba(247,244,239,0.65); line-height: 1.7; }
+
+  /* GITHUB PROJECTS */
+  #projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+  .repo-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .repo-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  .repo-name { font-family: 'DM Mono', monospace; font-size: 0.9rem; font-weight: 500; color: var(--accent); }
+  .repo-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .repo-meta { display: flex; gap: 1rem; align-items: center; }
+  .repo-lang {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 0.35rem;
+  }
+  .repo-lang::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .repo-stars { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+  .loading-msg { color: var(--muted); font-size: 0.9rem; font-style: italic; }
+
+  /* EDUCATION */
+  .edu-card {
+    display: flex; gap: 2rem; align-items: flex-start;
+    padding: 2rem; background: var(--card);
+    border: 1px solid var(--border); border-radius: 2px;
+    border-left: 3px solid var(--accent);
+  }
+  .edu-icon {
+    width: 52px; height: 52px; flex-shrink: 0;
+    background: var(--ink); color: var(--paper);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+  }
+  .edu-school { font-weight: 500; font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .edu-degree { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .edu-meta { display: flex; gap: 1.5rem; }
+  .edu-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    background: #fdf0ea;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  /* CONTACT */
+  #contact { border-top: 1px solid var(--border); text-align: center; }
+  .contact-intro { color: var(--muted); font-weight: 300; max-width: 480px; margin: 0 auto 2.5rem; font-size: 1.05rem; line-height: 1.8; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section, #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    h1 { font-size: 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-aside { padding-left: 0; border-left: none; border-top: 2px solid var(--border); padding-top: 1.5rem; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">KS</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner fade-in">
+    <p class="hero-label">Data Engineer &amp; Analytics Lead · New York, NY</p>
+    <h1>Karuna<br><em>Srivastava</em></h1>
+    <p class="hero-sub">8+ years building production-grade data systems for global banks. Currently at NYU, deepening the strategy side of analytics.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="mailto:ks8386@nyu.edu" class="btn btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">8+</div>
+        <div class="stat-lbl">Years experience</div>
+      </div>
+      <div>
+        <div class="stat-num">10M+</div>
+        <div class="stat-lbl">Records processed</div>
+      </div>
+      <div>
+        <div class="stat-num">2×</div>
+        <div class="stat-lbl">Hackathon winner</div>
+      </div>
+      <div>
+        <div class="stat-num">3.9</div>
+        <div class="stat-lbl">NYU GPA</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label fade-in">About</div>
+  <h2 class="fade-in">Bridging data<br><em style="font-family:'DM Serif Display',serif; font-style:italic; color:var(--accent)">engineering</em> &amp; strategy</h2>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>I'm a Technical Lead and Data Analyst with deep experience delivering <strong>production-ready systems</strong> for global clients in banking and telecommunications. My work spans the full spectrum — from ETL pipelines and microservices architecture to security hardening and executive-facing analytics.</p>
+      <p>After leading teams at Wipro and Infosys for major clients like PNC Bank and Capital One, I'm now pursuing my <strong>MS in Management &amp; Analytics at NYU</strong> to add rigorous business strategy to my technical foundation.</p>
+      <p>Outside of work, I compete in hackathons — winning at the NASA Space Apps Challenge and the NVIDIA &amp; Dell AI Hackathon in 2025.</p>
+    </div>
+    <div class="about-aside fade-in">
+      <div class="aside-item">
+        <div class="aside-item-label">Currently</div>
+        <div class="aside-item-val">MS Student, NYU (Expected May 2027)</div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-item-label">Specialization</div>
+        <div class="aside-item-val">Python · SQL · AWS · Microservices</div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-item-label">Open to</div>
+        <div class="aside-item-val">Data Engineering · Analytics · Strategy roles</div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-item-label">LinkedIn</div>
+        <div class="aside-item-val"><a href="https://linkedin.com/in/karunasrivastava" style="color:var(--accent)">linkedin.com/in/karunasrivastava</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:var(--ink); max-width:100%; padding:6rem 4rem;">
+  <div class="inner">
+    <div class="section-label fade-in">Technical Skills</div>
+    <h2 class="fade-in" style="color:var(--paper)">Tools of the<br><em style="font-family:'DM Serif Display',serif; font-style:italic;">trade</em></h2>
+    <div class="skills-grid fade-in">
+      <div>
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Java</span><span class="skill-tag">R</span><span class="skill-tag">HTML/CSS</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Spring Boot</span><span class="skill-tag">Spring MVC</span><span class="skill-tag">RESTful APIs</span><span class="skill-tag">Node.js</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Data & Reporting</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Oracle</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">Tableau</span><span class="skill-tag">Excel</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">DevOps & Cloud</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS</span><span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">Jenkins</span><span class="skill-tag">Git</span><span class="skill-tag">Apigee</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Security</div>
+        <div class="skill-tags">
+          <span class="skill-tag">OAuth 2.0</span><span class="skill-tag">SSO</span><span class="skill-tag">SAST</span><span class="skill-tag">IAST</span><span class="skill-tag">DevSecOps</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label fade-in">Experience</div>
+  <h2 class="fade-in">Where I've<br><em style="font-family:'DM Serif Display',serif; font-style:italic; color:var(--accent)">made an impact</em></h2>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="tl-meta">
+        <span class="tl-company">Wipro Limited</span>
+        <span class="tl-date">Feb 2022 – Feb 2024</span>
+      </div>
+      <div class="tl-role">Technical Lead — Data Analyst <span style="color:var(--muted); font-weight:300; font-size:0.9rem">(Client: PNC Bank)</span></div>
+      <ul class="tl-bullets">
+        <li>Transformed 10M+ financial records using Python and SQL, cutting manual effort by 80%</li>
+        <li>Automated Tableau/Excel reporting workflows — reduced turnaround from 3 days to 4 hours</li>
+        <li>Deployed validation scripts resolving 2,000+ discrepancies, raising accuracy to 99.9%</li>
+        <li>Uncovered financial trends via SQL outlier analysis that drove key strategic banking decisions</li>
+      </ul>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="tl-meta">
+        <span class="tl-company">Wipro Limited</span>
+        <span class="tl-date">Mar 2018 – Feb 2022</span>
+      </div>
+      <div class="tl-role">Technical Lead <span style="color:var(--muted); font-weight:300; font-size:0.9rem">(Clients: PNC Bank, Capital One)</span></div>
+      <ul class="tl-bullets">
+        <li>Modernized legacy systems to Spring Boot/Docker, handling 10M+ interactions with 50% speed gain</li>
+        <li>Led DevSecOps (SonarQube, SAST) rollout across 12 apps — eliminated 500+ vulnerabilities</li>
+        <li>Migrated 8 apps to OAuth 2.0/SSO, reducing breaches by 50% and securing analytics pipelines</li>
+        <li>Deployed Apigee API management for 5 teams, supporting $92M in revenue growth</li>
+        <li>Built CI/CD pipelines that cut deployment cycles by 70% (2 weeks → 4 days)</li>
+      </ul>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="tl-meta">
+        <span class="tl-company">Infosys Ltd</span>
+        <span class="tl-date">Dec 2016 – Mar 2018</span>
+      </div>
+      <div class="tl-role">Software Developer <span style="color:var(--muted); font-weight:300; font-size:0.9rem">(Clients: Telenet Group, Syngenta)</span></div>
+      <ul class="tl-bullets">
+        <li>Migrated ABAP code to SAP S/4HANA, enabling enterprise analytics with 28% cost savings</li>
+        <li>Revamped legacy web apps (Spring MVC), driving a 6% YoY subscriber increase</li>
+        <li>Optimized Oracle stored procedures, cutting issue resolution time by 90%</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label fade-in">Projects & Awards</div>
+  <h2 class="fade-in">Things I've<br><em style="font-family:'DM Serif Display',serif; font-style:italic; color:var(--accent)">built & won</em></h2>
+
+  <!-- Hackathon awards -->
+  <div class="awards-grid fade-in">
+    <div class="award-card">
+      <div class="award-org">NASA Space Apps Challenge · 2025</div>
+      <div class="award-title">Global Nominee &amp; Category Winner — "Best Use of Science" (NYC)</div>
+      <div class="award-desc">Designed a data-driven solution applying STEM to real-world disaster scenarios. Selected as a global nominee from thousands of international teams.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-org">NVIDIA &amp; Dell Hackathon · AI Summit NY 2025</div>
+      <div class="award-title">Offline AI Disaster Response System</div>
+      <div class="award-desc">Built a multimodal AI system using drone imagery and radio data designed for disconnected environments — no internet required.</div>
+    </div>
+  </div>
+
+  <!-- GitHub repos -->
+  <div class="section-label fade-in" style="margin-bottom:1rem;">GitHub Repositories</div>
+  <div id="projects-grid">
+    <p class="loading-msg">Loading repositories from GitHub...</p>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" style="background:#fdf9f5; max-width:100%; padding:6rem 4rem;">
+  <div class="inner" style="max-width:1100px; margin:0 auto;">
+    <div class="section-label fade-in">Education</div>
+    <h2 class="fade-in">Academic<br><em style="font-family:'DM Serif Display',serif; font-style:italic; color:var(--accent)">foundation</em></h2>
+    <div class="edu-card fade-in">
+      <div class="edu-icon">NYU</div>
+      <div>
+        <div class="edu-school">New York University</div>
+        <div class="edu-degree">Master of Science in Management and Analytics</div>
+        <div class="edu-meta">
+          <span class="edu-tag">GPA: 3.9 / 4.0</span>
+          <span class="edu-tag">Expected May 2027</span>
+          <span class="edu-tag">New York, NY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label fade-in">Contact</div>
+  <h2 class="fade-in">Let's<br><em style="font-family:'DM Serif Display',serif; font-style:italic; color:var(--accent)">connect</em></h2>
+  <p class="contact-intro fade-in">Open to data engineering, analytics, and strategy opportunities. Always happy to chat about interesting problems.</p>
+  <div class="contact-links fade-in">
+    <a href="mailto:ks8386@nyu.edu" class="btn btn-primary">ks8386@nyu.edu</a>
+    <a href="https://github.com/aarti290589" class="btn btn-outline" target="_blank">GitHub</a>
+    <a href="https://linkedin.com" class="btn btn-outline" target="_blank">LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Karuna Srivastava &nbsp;·&nbsp; Built with HTML &amp; hosted on GitHub Pages
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Fetch GitHub repos
+  async function loadRepos() {
+    const grid = document.getElementById('projects-grid');
+    try {
+      const res = await fetch('https://api.github.com/users/aarti290589/repos?sort=updated&per_page=12');
+      if (!res.ok) throw new Error('GitHub API error');
+      const repos = await res.json();
+      const excluded = ['aarti290589.github.io', 'testvulns'];
+      const filtered = repos.filter(r => !r.fork && !excluded.includes(r.name)).slice(0, 9);
+      if (filtered.length === 0) {
+        grid.innerHTML = '<p class="loading-msg">No public repositories found yet. Check back soon!</p>';
+        return;
+      }
+      grid.innerHTML = filtered.map(r => `
+        <a class="repo-card" href="${r.html_url}" target="_blank" rel="noopener">
+          <div class="repo-name">${r.name}</div>
+          <div class="repo-desc">${r.description || 'No description provided.'}</div>
+          <div class="repo-meta">
+            ${r.language ? `<span class="repo-lang">${r.language}</span>` : ''}
+            ${r.stargazers_count > 0 ? `<span class="repo-stars">★ ${r.stargazers_count}</span>` : ''}
+          </div>
+        </a>
+      `).join('');
+    } catch (e) {
+      grid.innerHTML = `<p class="loading-msg">Could not load repositories. <a href="https://github.com/aarti290589" target="_blank" style="color:var(--accent)">View on GitHub →</a></p>`;
+    }
+  }
+  loadRepos();
+</script>
+</body>
+</html>
